@@ -7,6 +7,10 @@ import {
   getClassByIdController,
   deleteClassController,
 } from "../controllers/class.controller";
+import {
+  createNoticeController,
+  getNoticesForClassController,
+} from "../controllers/notice.controller";
 
 const router = Router();
 router.get("/profile", authentication , authorize("teacher"), (req:Request, res:Response) => {
@@ -21,5 +25,8 @@ router.post("/classes", authentication, authorize("teacher"), createClassControl
 router.get("/classes", authentication, authorize("teacher"), getClassesController);
 router.get("/classes/:id", authentication, authorize("teacher"), getClassByIdController);
 router.delete("/classes/:id", authentication, authorize("teacher"), deleteClassController);
+
+router.post("/classes/:id/notices", authentication, authorize("teacher"), createNoticeController);
+router.get("/classes/:id/notices", authentication, authorize("teacher"), getNoticesForClassController);
 
 export default router;

@@ -6,6 +6,10 @@ import {
   getEnrolledClassesController,
   getEnrolledClassByIdController,
 } from "../controllers/student.controller";
+import {
+  getStudentNoticesController,
+  markNoticeReadController,
+} from "../controllers/notice.controller";
 
 const router = Router();
 
@@ -20,5 +24,8 @@ router.get("/", authentication, authorize("student"), (req: Request, res: Respon
 router.post("/classes/join", authentication, authorize("student"), joinClassController);
 router.get("/classes", authentication, authorize("student"), getEnrolledClassesController);
 router.get("/classes/:id", authentication, authorize("student"), getEnrolledClassByIdController);
+
+router.get("/notices", authentication, authorize("student"), getStudentNoticesController);
+router.patch("/notices/:id/read", authentication, authorize("student"), markNoticeReadController);
 
 export default router;
